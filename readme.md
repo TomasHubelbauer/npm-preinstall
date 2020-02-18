@@ -40,3 +40,20 @@ still susceptible to the same problem.
 From the point of view of developer experience, it would be really great
 to have a hook to fill this void. However, NPM is unlikely to include such
 quality of life improvements IMO.
+
+## Update
+
+There is also `prepublish` which gets run both on local NPM install and
+before `publish`. There's some stuff that happened around this:
+
+https://docs.npmjs.com/misc/scripts#prepublish-and-prepare
+
+Long story short, use `prepare` for a non-deprecated hook which runs before
+local NPM install, but keep in mind, that this is also called before publish.
+
+This might be undesirable when using `prepare` for installing prerequisites
+where they are not required for publish but are for running the package in
+development.
+
+It doesn't appear there is a hook which _only_ runs before local NPM
+install.
